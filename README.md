@@ -53,4 +53,8 @@ I recommend you to run this application in a seperate screen. (```sudo apt-get i
 I plan to give this script VLC support, so you can read out every song you're playing on VLC. If you find any bugs, please report them, so I can fix them.
 
 ### Important notice
-This is just a very basic script. I'm not really fluent in Bash and that's my first "real" script. **It is tested on Ubuntu GNOME and on Kubuntu. I'm not sure if this will work on other distros.**
+This is just a very basic script. I'm not really fluent in Bash and that's my first "real" script. **It is tested on:**
+
+* Ubuntu GNOME
+* Kubuntu (KDE)
+* Debian 8 (LXDE)
