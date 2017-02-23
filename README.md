@@ -2,6 +2,8 @@
 This simple bash-script allows you to get the current spotify-song playing and put it into OBS.
 
 ## Installation
+### Tutorial
+I've made a little tutorial-video. Be sure to check it out [here](https://www.youtube.com/watch?v=QND0d5Enzo4).
 ### Requirements
 For this to work, you have to have ```wmctrl``` installed. This is needed to find the window title of Spotify. 
 You can install wmctrl by using the command ```sudo apt-get install wmctrl``` .
