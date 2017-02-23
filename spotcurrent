@@ -25,7 +25,13 @@ echo -e 'SpotCurrent v1.0 by flymia\n';
 
 #User enters the desired interval
 echo -n 'Enter your preferred check-interval (Press ENTER for default 5 seconds): ';
+
 read interval;
+
+if [[ -n ${interval//[0-9]/} ]]; then
+	echo "Contains letters! Exiting..."
+	exit 1;
+fi
 
 #If nothing was read, using the default interval;
 if [ -z "$interval" ]; then
