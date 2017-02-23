@@ -1,0 +1,13 @@
+#!/bin/bash
+
+if [ "$(whoami)" != 'root' ]; then
+        echo "You have to be root to uninstall SpotCurrent. Try running with sudo."
+        exit 1;
+fi
+
+echo 'Uninstalling SpotCurrent v1.0...';
+
+rm -rf /usr/bin/spotcurrent
+
+echo 'Uninstallation complete. Goodbye and thanks for using SpotCurrent.'
+exit 0;

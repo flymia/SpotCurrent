@@ -1,0 +1,14 @@
+#!/bin/bash
+
+if [ "$(whoami)" != 'root' ]; then
+        echo "You have to be root to install SpotCurrent. Try running with sudo."
+        exit 1;
+fi
+
+echo 'Installing SpotCurrent v1.0...';
+chmod +x spotcurrent
+
+cp spotcurrent /usr/bin
+
+echo 'Installation complete. Run SpotCurrent with the command "spotcurrent".'
+exit 0;
