@@ -1,14 +1,16 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-if [ "$(whoami)" != 'root' ]; then
+scriptdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+
+if [[ $EUID -ne 0 ]]; then
         echo "You have to be root to install SpotCurrent. Try running with sudo."
         exit 1;
 fi
 
 echo 'Installing SpotCurrent v1.0...';
-chmod +x spotcurrent
+chmod +x "$scriptdir/spotcurrent"
 
-cp spotcurrent /usr/bin
+cp "$scriptdir/spotcurrent" /usr/bin
 
 echo 'Installation complete. Run SpotCurrent with the command "spotcurrent".'
 exit 0;
