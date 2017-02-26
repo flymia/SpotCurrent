@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-scriptdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+scriptdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 if [[ $EUID -ne 0 ]]; then
         echo "You have to be root to install SpotCurrent. Try running with sudo."
