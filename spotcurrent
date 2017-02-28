@@ -43,7 +43,7 @@ if [ -e /tmp/currentsong.txt ]
 		exit 1;
 	else
 		echo 'To abort press CTRL+C';		
-		echo -e 'Sarting songcheck...\n';
+		echo -e 'Starting song check...\n';
 		#Create the currentsong file
 		touch /tmp/currentsong.txt
 		
