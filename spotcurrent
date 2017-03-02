@@ -1,6 +1,4 @@
 #!/bin/bash
-#Getting the hostname of the client
-hostname=$(hostname);
 #Grepping out the PID of spotify
 spotifyid=$(ps -ef | grep '[/]usr/share/spotify' | awk '{print $2}' | head -1)
 
@@ -9,19 +7,19 @@ spotifyid=$(ps -ef | grep '[/]usr/share/spotify' | awk '{print $2}' | head -1)
 #If no PID is found, exit with the warning.
 if [ -z "$spotifyid" ]; then
 	echo 'Spotify not running! PID not found.';
-	exit 0;
+	exit 1;
 fi;
 
 #Trapping CTRL+C
 onexit()
 {
-	rm -rf /tmp/currentsong.txt;
+	rm -f /tmp/currentsong.txt;
 	echo 'OK, exiting and deleting Songfile!';
 	exit 1;
 }
 trap onexit SIGINT;
 
-echo -e 'SpotCurrent v1.0 by flymia\n';
+echo -e 'SpotCurrent v1.0.1 by flymia\n';
 
 #User enters the desired interval
 echo -n 'Enter your preferred check-interval (Press ENTER for default 5 seconds): ';
@@ -45,14 +43,14 @@ if [ -e /tmp/currentsong.txt ]
 		exit 1;
 	else
 		echo 'To abort press CTRL+C';		
-		echo -e 'Sarting songcheck...\n';
+		echo -e 'Starting song check...\n';
 		#Create the currentsong file
 		touch /tmp/currentsong.txt
 		
 		#Main loop of the script
 		while true; do
 			#Get the current song by listing all windows and grepping the matching window with the PID
-			currentsong=$(wmctrl -l -p | grep $spotifyid | sed -n 's/.*'$hostname'//p');
+			currentsong=$(wmctrl -l -p | grep $spotifyid | sed -n 's/.*'$HOSTNAME'//p');
 			
 			if [ "$(echo $currentsong)" == 'Spotify' ]; then
 					currentsong='Song paused';
@@ -60,11 +58,10 @@ if [ -e /tmp/currentsong.txt ]
 			
 			echo -n 'Current song: ';
 			echo $currentsong;
-			currentsong=$currentsong ;
 			echo -n $currentsong' ' > /tmp/currentsong.txt
 			sleep $interval;
 		done
 		echo 'Exiting and deleting songfile';
-		rm -rf /tmp/currentsong.txt
+		rm -f /tmp/currentsong.txt
 		exit 0;
 fi
