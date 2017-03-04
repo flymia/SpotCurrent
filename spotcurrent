@@ -53,12 +53,24 @@ if [ -e /tmp/currentsong.txt ]
 			currentsong=$(wmctrl -l -p | grep $spotifyid | sed -n 's/.*'$HOSTNAME'//p');
 			
 			if [ "$(echo $currentsong)" == 'Spotify' ]; then
-					currentsong='Song paused';
+				currentsong='Song paused';
 			fi
 			
 			echo -n 'Current song: ';
 			echo $currentsong;
-			echo -n $currentsong' ' > /tmp/currentsong.txt
+			# use -t to display in two lines
+			if [ $# -lt 1 ]; then
+				echo -n $currentsong' ' > /tmp/currentsong.txt
+			elif [ $1 == "-t" ]; then
+				split=" - "
+				artist=${currentsong%%${split}*}
+				song=${currentsong#*${split}}
+				printf "%40s\n" "$artist - " > /tmp/currentsong.txt
+				printf "%40s\n" "$song" >> /tmp/currentsong.txt
+				
+			fi
+			# debug
+			# tail /tmp/currentsong.txt
 			sleep $interval;
 		done
 		echo 'Exiting and deleting songfile';
