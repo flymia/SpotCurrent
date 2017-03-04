@@ -58,16 +58,30 @@ if [ -e /tmp/currentsong.txt ]
 			
 			echo -n 'Current song: ';
 			echo $currentsong;
-			# use -t to display in two lines
+			
 			if [ $# -lt 1 ]; then
 				echo -n $currentsong' ' > /tmp/currentsong.txt
+			# use -t to display in two lines
 			elif [ $1 == "-t" ]; then
+				split=" - "
+				artist=${currentsong%%${split}*}
+				song=${currentsong#*${split}}
+				echo $artist > /tmp/currentsong.txt
+				echo $song >> /tmp/currentsong.txt
+			# use -tc to display in two lines and center the artist
+			elif [ $1 == "-tc" ]; then
 				split=" - "
 				artist=${currentsong%%${split}*}
 				song=${currentsong#*${split}}
 				printf "%40s\n" "$artist - " > /tmp/currentsong.txt
 				printf "%40s\n" "$song" >> /tmp/currentsong.txt
-				
+                        # use -s to split the artist and song into different files
+			elif [ $1 == "-s" ]; then
+                             	split=" - "
+				artist=${currentsong%%${split}*}
+				song=${currentsong#*${split}}
+				echo $artist > /tmp/currentartist.txt
+				echo $song > /tmp/currentsong.txt   
 			fi
 			# debug
 			# tail /tmp/currentsong.txt
