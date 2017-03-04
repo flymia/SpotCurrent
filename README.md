@@ -47,6 +47,8 @@ The script runs now and gives you the information about the current song.
 The current song is listed in a file: ```/tmp/currentsong.txt```
 You can adjust your OBS for listening a text object on that file. Of course, you can use it with other programs, too.
 
+You also have the option to split the song and the artist by using the ```-s``` argument. There is also an option for displaying artist and song in one file, but centered and in two lines by using the ```-t``` or ```-tc``` argument.
+
 ![Showing the current song with OBS](https://puu.sh/um3fw/5c7ca3cecf.png)
 
 And again: You can use this with other software too. For example showing someone on TeamSpeak to which song you are listening. My application only reads out the current song playing. Nothing more. The rest is up to you!
