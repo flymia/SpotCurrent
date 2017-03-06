@@ -7,7 +7,7 @@ if [[ $EUID -ne 0 ]]; then
         exit 1;
 fi
 
-echo 'Installing SpotCurrent v1.0.1...';
+echo 'Installing SpotCurrent v1.0.2...';
 chmod +x "$scriptdir/spotcurrent"
 
 cp "$scriptdir/spotcurrent" /usr/bin
