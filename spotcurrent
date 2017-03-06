@@ -14,7 +14,12 @@ fi;
 onexit()
 {
 	rm -f /tmp/currentsong.txt;
+	if [ -e /tmp/currentartist.txt ]; then
+		echo 'Deleting Artistfile!';
+		rm -f /tmp/currentartist.txt;
+	fi
 	echo 'OK, exiting and deleting Songfile!';
+	echo 'Quitting SpotCurrent...';
 	exit 1;
 }
 trap onexit SIGINT;
@@ -42,23 +47,23 @@ if [ -e /tmp/currentsong.txt ]
 		echo 'Another instance is running! Exiting!';
 		exit 1;
 	else
-		echo 'To abort press CTRL+C';		
+		echo 'To abort press CTRL+C';
 		echo -e 'Starting song check...\n';
 		#Create the currentsong file
 		touch /tmp/currentsong.txt
-		
+
 		#Main loop of the script
 		while true; do
 			#Get the current song by listing all windows and grepping the matching window with the PID
 			currentsong=$(wmctrl -l -p | grep $spotifyid | sed -n 's/.*'$HOSTNAME'//p');
-			
+
 			if [ "$(echo $currentsong)" == 'Spotify' ]; then
 				currentsong='Song paused';
 			fi
-			
+
 			echo -n 'Current song: ';
 			echo $currentsong;
-			
+
 			if [ $# -lt 1 ]; then
 				echo -n $currentsong' ' > /tmp/currentsong.txt
 			# use -t to display in two lines
@@ -81,7 +86,7 @@ if [ -e /tmp/currentsong.txt ]
 				artist=${currentsong%%${split}*}
 				song=${currentsong#*${split}}
 				echo $artist > /tmp/currentartist.txt
-				echo $song > /tmp/currentsong.txt   
+				echo $song > /tmp/currentsong.txt
 			fi
 			# debug
 			# tail /tmp/currentsong.txt
