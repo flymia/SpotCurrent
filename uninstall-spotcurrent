@@ -7,7 +7,7 @@ if [[ $EUID -ne 0 ]]; then
         exit 1;
 fi
 
-echo 'Uninstalling SpotCurrent v1.0.1...';
+echo 'Uninstalling SpotCurrent v1.0.2...';
 
 rm -f "$(which spotcurrent)"
 
