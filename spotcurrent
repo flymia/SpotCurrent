@@ -24,7 +24,7 @@ onexit()
 }
 trap onexit SIGINT;
 
-echo -e 'SpotCurrent v1.0.1 by flymia\n';
+echo -e 'SpotCurrent v1.0.2 \n';
 
 #User enters the desired interval
 echo -n 'Enter your preferred check-interval (Press ENTER for default 5 seconds): ';
