@@ -1,5 +1,5 @@
 # SpotCurrent BETA
-This simple bash script allows you to get the current spotify-song playing and put it into OBS.
+This simple bash script allows you to get the current Spotify song playing and put it into OBS.
 
 ## Installation
 ### Tutorial
