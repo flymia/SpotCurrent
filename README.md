@@ -7,10 +7,10 @@ I've made a little tutorial video. Be sure to check it out [here](https://www.yo
 ### Requirements
 For this to work, you have to have ```wmctrl``` installed. This is needed to find the window title of Spotify. 
 
-#### On a debian based system
+#### On a Debian based system
 ```sudo apt-get install wmctrl```
 
-#### On an arch based system
+#### On an Arch based system
 ```sudo pacman -S wmctrl```
 
 #### On Fedora
