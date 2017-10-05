@@ -2,8 +2,6 @@
 #Grepping out the PID of spotify
 spotifyid=$(ps -ef | grep '[/]usr/share/spotify' | awk '{print $2}' | head -1)
 
-#echo $spotifyid;
-
 #If no PID is found, exit with the warning.
 if [ -z "$spotifyid" ]; then
 	echo 'Spotify not running! PID not found.';
@@ -24,7 +22,31 @@ onexit()
 }
 trap onexit SIGINT;
 
-echo -e 'SpotCurrent v1.0.3 \n';
+echo -e 'SpotCurrent v1.0.4 \n';
+
+#User enters prefered mode
+case "$1" in
+	-t)
+		mode=t
+	;;
+	-tc)
+		mode=tc
+	;;
+	-s)
+		mode=s	
+	;;
+	-help)
+		echo "Options:"
+		echo "Use -t to seperate artist and song with one line."
+		echo "Use -tc to do the same, but the artist gets centered."
+		echo "Use -s to sperate artist and song in two files."
+		exit 0
+	;;
+	*)
+		mode=normal
+esac
+
+#echo $mode
 
 #User enters the desired interval
 echo -n 'Enter your preferred check-interval (Press ENTER for default 5 seconds): ';
@@ -67,33 +89,35 @@ if [ -e /tmp/currentsong.txt ]
 
 			echo -n 'Current song: ';
 			echo $currentsong;
+			
+			#Detects usermode
+			case "$mode" in
+				t)
+	                                split=" - "
+        	                        artist=${currentsong%%${split}*}
+                	                song=${currentsong#*${split}}
+                        	        echo $artist > /tmp/currentsong.txt
+                                	echo $song >> /tmp/currentsong.txt
+				;;
+				tc)
+					split=" - "
+        	                        artist=${currentsong%%${split}*}
+                	                song=${currentsong#*${split}}
+                        	        printf "%40s\n" "$artist - " > /tmp/currentsong.txt
+                                	printf "%40s\n" "$song" >> /tmp/currentsong.txt
+				;;
+				s)
+					split=" - "
+	                                artist=${currentsong%%${split}*}
+	                                song=${currentsong#*${split}}
+	                                echo $artist > /tmp/currentartist.txt
+	                                echo $song > /tmp/currentsong.txt
+				;;
+				*)
+	                                echo -n $currentsong' ' > /tmp/currentsong.txt
 
-			if [ $# -lt 1 ]; then
-				echo -n $currentsong' ' > /tmp/currentsong.txt
-			# use -t to display in two lines
-			elif [ $1 == "-t" ]; then
-				split=" - "
-				artist=${currentsong%%${split}*}
-				song=${currentsong#*${split}}
-				echo $artist > /tmp/currentsong.txt
-				echo $song >> /tmp/currentsong.txt
-			# use -tc to display in two lines and center the artist
-			elif [ $1 == "-tc" ]; then
-				split=" - "
-				artist=${currentsong%%${split}*}
-				song=${currentsong#*${split}}
-				printf "%40s\n" "$artist - " > /tmp/currentsong.txt
-				printf "%40s\n" "$song" >> /tmp/currentsong.txt
-                        # use -s to split the artist and song into different files
-			elif [ $1 == "-s" ]; then
-                             	split=" - "
-				artist=${currentsong%%${split}*}
-				song=${currentsong#*${split}}
-				echo $artist > /tmp/currentartist.txt
-				echo $song > /tmp/currentsong.txt
-			fi
-			# debug
-			# tail /tmp/currentsong.txt
+			esac
+
 			sleep $interval;
 		done
 		echo 'Exiting and deleting songfile';
