@@ -1,4 +1,4 @@
-# SpotCurrent BETA
+# SpotCurrent
 This simple bash script allows you to get the current Spotify song playing and put it into OBS.
 
 ## Installation
@@ -6,7 +6,18 @@ This simple bash script allows you to get the current Spotify song playing and p
 I've made a little tutorial video. Be sure to check it out [here](https://www.youtube.com/watch?v=QND0d5Enzo4).
 ### Requirements
 For this to work, you have to have ```wmctrl``` installed. This is needed to find the window title of Spotify. 
-You can install wmctrl by using the command ```sudo apt-get install wmctrl``` .
+
+#### On a debian based system
+```sudo apt-get install wmctrl```
+
+#### On an arch based system
+```sudo pacman -S wmctrl```
+
+#### On Fedora
+```sudo dnf install wmctrl```
+
+#### Other distros
+I'm sure pretty much every distro should have wmctrl in der repos. Go have a look for your distro.
 
 ### Running the script
 Download the script and give it the appropriate rights to run (you don't need sudo or anything like that).
@@ -65,4 +76,6 @@ This is just a very basic script. I'm not really fluent in Bash and that's my fi
 
 * Ubuntu GNOME
 * Kubuntu (KDE)
-* Debian 8 (LXDE)
+* Debian 8 'Jessie' (LXDE)
+* Antergos (Arch based)
+* Debian 9 'Stretch'
