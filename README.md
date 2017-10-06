@@ -17,7 +17,7 @@ For this to work, you have to have ```wmctrl``` installed. This is needed to fin
 ```sudo dnf install wmctrl```
 
 #### Other distros
-I'm sure pretty much every distro should have wmctrl in der repos. Go have a look for your distro.
+I'm sure pretty much every distro should have wmctrl in their repos. Go have a look for your distro.
 
 ### Running the script
 Download the script and give it the appropriate rights to run (you don't need sudo or anything like that).
