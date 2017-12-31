@@ -1,10 +1,17 @@
 #!/bin/bash
 #Grepping out the PID of spotify
 spotifyid=$(ps -ef | grep '[/]usr/share/spotify' | awk '{print $2}' | head -1)
+wmctrlpath=$(command -v wmctrl)
 
 #If no PID is found, exit with the warning.
 if [ -z "$spotifyid" ]; then
 	echo 'Spotify not running! PID not found.';
+	exit 1;
+fi;
+
+# Check if wmctrl is installed
+if [ -z "$wmctrlpath" ]; then
+	echo 'wmctrl not found. Please install it using the appropriate package manager.'
 	exit 1;
 fi;
 
@@ -22,7 +29,7 @@ onexit()
 }
 trap onexit SIGINT;
 
-echo -e 'SpotCurrent v1.0.4 \n';
+echo -e 'SpotCurrent v1.0.5 \n';
 
 #User enters prefered mode
 case "$1" in
@@ -49,7 +56,7 @@ esac
 #echo $mode
 
 #User enters the desired interval
-echo -n 'Enter your preferred check-interval (Press ENTER for default 5 seconds): ';
+echo -n 'Enter your preferred check interval (Press ENTER for default 5 seconds): ';
 
 read interval;
 
