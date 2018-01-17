@@ -3,27 +3,29 @@
 spotifyid=$(ps -ef | grep '[/]usr/share/spotify' | awk '{print $2}' | head -1)
 wmctrlpath=$(command -v wmctrl)
 
-#If no PID is found, exit with the warning.
-if [ -z "$spotifyid" ]; then
-	echo 'Spotify not running! PID not found.';
-	exit 1;
-fi;
-
 # Check if wmctrl is installed
 if [ -z "$wmctrlpath" ]; then
 	echo 'wmctrl not found. Please install it using the appropriate package manager.'
 	exit 1;
 fi;
 
+
+#If no PID is found, exit with the warning.
+if [ -z "$spotifyid" ]; then
+	echo 'Spotify not running! PID not found.';
+	exit 1;
+fi;
+
+
 #Trapping CTRL+C
 onexit()
 {
 	rm -f /tmp/currentsong.txt;
 	if [ -e /tmp/currentartist.txt ]; then
-		echo 'Deleting Artistfile!';
+		echo 'Deleting artist file!';
 		rm -f /tmp/currentartist.txt;
 	fi
-	echo 'OK, exiting and deleting Songfile!';
+	echo 'OK, exiting and deleting song file!';
 	echo 'Quitting SpotCurrent...';
 	exit 1;
 }
@@ -127,7 +129,7 @@ if [ -e /tmp/currentsong.txt ]
 
 			sleep $interval;
 		done
-		echo 'Exiting and deleting songfile';
+		echo 'Exiting and deleting song file';
 		rm -f /tmp/currentsong.txt
 		exit 0;
 fi
