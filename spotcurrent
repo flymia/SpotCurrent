@@ -27,11 +27,11 @@ onexit()
 	fi
 	echo 'OK, exiting and deleting song file!';
 	echo 'Quitting SpotCurrent...';
-	exit 1;
+	exit 0;
 }
 trap onexit SIGINT;
 
-echo -e 'SpotCurrent v1.0.5 \n';
+echo -e 'SpotCurrent v1.0.6 \n';
 
 #User enters prefered mode
 case "$1" in
@@ -89,6 +89,10 @@ if [ -e /tmp/currentsong.txt ]
 			currentsong=$(wmctrl -l -p | grep $spotifyid | sed -n 's/.*'$HOSTNAME'//p');
 
 			if [ "$(echo $currentsong)" == 'Spotify' ]; then
+				currentsong='Song paused';
+			fi
+
+			if [ "$(echo $currentsong)" == 'Spotify Premium' ]; then
 				currentsong='Song paused';
 			fi
 
