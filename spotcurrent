@@ -1,6 +1,6 @@
 #!/bin/bash
 #Grepping out the PID of spotify
-spotifyid=$(ps -ef | grep '[/]usr/share/spotify' | awk '{print $2}' | head -1)
+spotifyid=$(ps -ef | grep -e '[/]usr/share/spotify' -e '[/]opt/spotify' | awk '{print $2}' | head -1)
 wmctrlpath=$(command -v wmctrl)
 
 # Check if wmctrl is installed
