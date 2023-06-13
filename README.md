@@ -1,6 +1,8 @@
 # SpotCurrent
 This simple bash script allows you to get the current Spotify song playing and put it into OBS.
 
+## Warning: This script does not work anymore! Spotify is not including the song title in the title of the window, so my script can't read anything from there. This repo will get archived, since the script is useless now. Thank you for everyone who used this and contributed to it!
+
 ## Installation
 ### Tutorial
 I've made a little tutorial video. Be sure to check it out [here](https://www.youtube.com/watch?v=QND0d5Enzo4).
